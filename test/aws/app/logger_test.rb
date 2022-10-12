@@ -3,6 +3,7 @@
 require 'stringio'
 require 'test_helper'
 require 'rainbow'
+require 'json'
 
 class Aws::App::LoggerTest < Test::Unit::TestCase
   puts 'Test log message: ' + @@test_message =
@@ -15,6 +16,8 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
       ::Aws::App::Logger.const_defined?(:VERSION)
     end
   end
+
+  # Existing functionality from Logger, passed through.
 
   test 'output includes message' do
     $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
@@ -33,8 +36,7 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     $logger.level = :info
     $logger.info @@test_message
     $logger.debug @@test_message
-    assert output.string =~ /info/i
-    assert output.string !~ /debug/i
+    assert output.string =~ /info/i and output.string !~ /debug/i
   end
 
   test 'existing formatter interface still works' do
@@ -42,6 +44,17 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     $logger.formatter = proc {|severity, time, p, msg| "TEST#{severity}: #{msg}\n" }
     $logger.debug @@test_message
     assert output.string =~ /TESTDEBUG/i
+  end
+
+  # New functionality for AWS CloudWatch
+
+  test 'logging an object with debug' do
+    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger.debug @@test_message, {id:'10102001', total:'1295'}
+    assert(
+      output.string.include?(@@test_message) &&
+      JSON.parse(output.string.split("\n").last)['id'].eql?('10102001')
+    )
   end
 
 end
