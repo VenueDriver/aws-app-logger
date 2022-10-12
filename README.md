@@ -41,7 +41,7 @@ So, this:
 
 ...becomes:
 
-    $logger.info Starting to process order.', @order.id
+    $logger.info 'Starting to process order.', @order.id
 
 And instead of this in your logs:
 
@@ -77,6 +77,8 @@ logger with:
     require 'aws-app-logger'
     $logger = Aws::App::Logger.new
 
+### Segment logging by application and environment
+
 Coming soon:
 
     $logger = Aws::App::Logger.new(
@@ -85,7 +87,7 @@ Coming soon:
     )
     ...
     2022-10-12T16:20:45.891-05:00	DEBUG: Starting to process order.
-      {"message":"Starting to process order.", "application":"Your App Name Here", "environment":"staging", "id":"1234","total":"4592","subtotal":"..."}
+      {"message":"Starting to process order.", "application":"Your App Name Here", "environment":"staging", "id":"10012001","total":"1295","subtotal":"..."}
 
 
 ## Development
