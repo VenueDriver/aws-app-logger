@@ -28,4 +28,20 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     assert output.string =~ /debug/i
   end
 
+  test 'output includes appropriate severity log lines' do
+    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger.level = :info
+    $logger.info @@test_message
+    $logger.debug @@test_message
+    assert output.string =~ /info/i
+    assert output.string !~ /debug/i
+  end
+
+  test 'existing formatter interface still works' do
+    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger.formatter = proc {|severity, time, p, msg| "TEST#{severity}: #{msg}\n" }
+    $logger.debug @@test_message
+    assert output.string =~ /TESTDEBUG/i
+  end
+
 end

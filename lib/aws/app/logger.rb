@@ -11,10 +11,6 @@ module Aws
 
       def initialize(io:nil)
         @logger = ::Logger.new(io ||= STDOUT)
-        @logger.level = ::Logger::DEBUG
-        @logger.formatter =
-          proc {|severity, time, p, msg| "#{severity}: #{msg}\n" }
-        @logger
       end
 
       # For handling 'debug', 'warn', etc
