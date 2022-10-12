@@ -14,7 +14,6 @@ module Aws
         @logger.level = ::Logger::DEBUG
         @logger.formatter =
           proc {|severity, time, p, msg| "#{severity}: #{msg}\n" }
-        byebug
         @logger
       end
 
