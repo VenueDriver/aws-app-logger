@@ -48,12 +48,31 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
 
   # New functionality for AWS CloudWatch
 
-  test 'logging an object with debug' do
+  test 'logging an object as JSON with debug' do
     $logger = Aws::App::StructuredLogger.new(output = StringIO.new)
-    $logger.debug @@test_message, {id:'10102001', total:'1295'}
+    $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
     assert(
       output.string.include?(@@test_message) &&
-      JSON.parse(output.string.split("\n").last)['id'].eql?('10102001')
+      JSON.parse(output.string.split("\n")[1])['id'].eql?('10102001')
+    )
+  end
+
+  test 'logging an object includes pretty-printed version' do
+    $logger = Aws::App::StructuredLogger.new(output = StringIO.new)
+    $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
+    assert(
+      output.string.include?(@@test_message) &&
+      Rainbow.uncolor(output.string).include?(':id => "10102001"')
+    )
+  end
+
+  test 'the nopretty option disables the pretty-printed version' do
+    $logger = Aws::App::StructuredLogger.new(output = StringIO.new,
+      nopretty:true)
+    $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
+    assert(
+      output.string.include?(@@test_message) &&
+      ! Rainbow.uncolor(output.string).include?(':id => "10102001"')
     )
   end
 

@@ -43,14 +43,25 @@ So, this:
 
     $logger.info 'Starting to process order.', @order.id
 
-And instead of this in your logs:
+And instead of this in your CloudWatch logs:
 
-    2022-10-12T16:20:45.891-05:00	DEBUG: Starting to process order: 1234
+    2022-10-12T16:20:45.891-05:00 	DEBUG: Starting to process order: 1234
 
 ...you get this:
 
-    2022-10-12T16:20:45.891-05:00	DEBUG: Starting to process order.
+    2022-10-12T16:20:45.891-05:00 DEBUG: Starting to process order.
       {"message":"Starting to process order.", "id":"1234","total":"4592","subtotal":"..."}
+      Hash
+      {
+              :id => "10102001",
+           :total => "1295",
+        :subtotal => "..."
+      }
+
+If you don't want the pretty-printed representation at the end, then you can
+use the `nopretty:true` option when you set up your logging:
+
+    
 
 Now, you can use AWS Log Insights to locate every `message` related to any
 specific order `id`, because both of those things are machine-readable and
