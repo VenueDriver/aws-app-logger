@@ -4,12 +4,13 @@ require 'logger'
 require 'json'
 require 'awesome_print'
 require_relative "logger/version"
+require_relative "logger/formatter"
 
 module Aws
   module App
     class Error < StandardError; end
 
-    class StructuredLogger < ::Logger
+    class Logger < ::Logger
 
       # Option to suppress pretty-printing strucutured data.
       attr_accessor :nopretty
@@ -32,6 +33,10 @@ module Aws
           progname: nil, formatter: nil, datetime_format: nil,
           binmode: false, shift_period_suffix: '%Y%m%d',
         )
+
+        @default_formatter = Aws::App::Logger::Formatter.new
+
+        self
       end
 
       def add(severity, *args, &block)

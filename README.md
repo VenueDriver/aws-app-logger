@@ -49,7 +49,7 @@ And instead of this in your CloudWatch logs:
 
 ...you get this:
 
-    2022-10-12T16:20:45.891-05:00 DEBUG: Starting to process order.
+    DEBUG: Starting to process order.
       {"message":"Starting to process order.", "id":"1234","total":"4592","subtotal":"..."}
       Hash
       {
@@ -58,10 +58,9 @@ And instead of this in your CloudWatch logs:
         :subtotal => "..."
       }
 
-If you don't want the pretty-printed representation at the end, then you can
-use the `nopretty:true` option when you set up your logging:
-
-    
+CloudWatch already provides a timestamp, so you don't need that.  The second,
+indented line of your log output is machine-readable JSON data, and after
+that is a human-readable, pretty-printed version for you to read.
 
 Now, you can use AWS Log Insights to locate every `message` related to any
 specific order `id`, because both of those things are machine-readable and
@@ -86,13 +85,20 @@ global `$logger` for you to use for logging, then you can override the default
 logger with:
 
     require 'aws-app-logger'
-    $logger = Aws::App::StructuredLogger.new
+    $logger = Aws::App::Logger.new
+
+### Suppress pretty printing
+
+If you don't want the pretty-printed representation at the end, then you can
+use the `nopretty:true` option when you set up your logging:
+
+    nopretty:true
 
 ### Segment logging by application and environment
 
 Coming soon:
 
-    $logger = Aws::App::StructuredLogger.new(
+    $logger = Aws::App::Logger.new(
       application: 'Your App Name Here',
       environment: 'staging'
     )
