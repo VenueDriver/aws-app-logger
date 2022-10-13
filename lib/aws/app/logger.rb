@@ -8,31 +8,24 @@ module Aws
   module App
     class Error < StandardError; end
 
-    class Logger
-
-      def initialize(io:nil)
-        @logger = ::Logger.new(io ||= STDOUT)
-      end
-
-      # For handling 'debug', 'warn', etc
-      def method_missing(name, *args, &block)
-        @logger.send(name, *args, &block)
-      end
+    class StructuredLogger < ::Logger
 
       def add(severity, *args, &block)
         case args.count
         when 1
-          @logger.add(severity, args.first, &block)
+          super(severity, args.first, &block)
         when 2
-          @logger.add(severity, nil,
+          super(severity, nil,
             args.shift +
             "\n  " + args.shift.to_json,
           &block)
         end
       end
 
-      def debug(*args, &block)
-        add(::Logger::DEBUG, *args, &block)
+      %w{debug info warn error fatal unknown}.each do |level|
+        define_method level.to_sym do |*args, &block|
+          add(eval("::Logger::#{level.upcase}"), *args, &block)
+        end
       end
 
     end

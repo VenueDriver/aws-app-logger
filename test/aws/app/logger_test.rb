@@ -13,26 +13,26 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
 
   test 'VERSION' do
     assert do
-      ::Aws::App::Logger.const_defined?(:VERSION)
+      Aws::App::StructuredLogger.const_defined?(:VERSION)
     end
   end
 
   # Existing functionality from Logger, passed through.
 
   test 'output includes message' do
-    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger = Aws::App::StructuredLogger.new(output = StringIO.new)
     $logger.debug @@test_message
     assert output.string.include? @@test_message
   end
 
   test 'output includes severity' do
-    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger = Aws::App::StructuredLogger.new(output = StringIO.new)
     $logger.debug @@test_message
     assert output.string =~ /debug/i
   end
 
   test 'output includes appropriate severity log lines' do
-    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger = Aws::App::StructuredLogger.new(output = StringIO.new)
     $logger.level = :info
     $logger.info @@test_message
     $logger.debug @@test_message
@@ -40,7 +40,7 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
   end
 
   test 'existing formatter interface still works' do
-    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger = Aws::App::StructuredLogger.new(output = StringIO.new)
     $logger.formatter = proc {|severity, time, p, msg| "TEST#{severity}: #{msg}\n" }
     $logger.debug @@test_message
     assert output.string =~ /TESTDEBUG/i
@@ -49,7 +49,7 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
   # New functionality for AWS CloudWatch
 
   test 'logging an object with debug' do
-    $logger = ::Aws::App::Logger.new(io: output = StringIO.new)
+    $logger = Aws::App::StructuredLogger.new(output = StringIO.new)
     $logger.debug @@test_message, {id:'10102001', total:'1295'}
     assert(
       output.string.include?(@@test_message) &&

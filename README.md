@@ -75,13 +75,13 @@ global `$logger` for you to use for logging, then you can override the default
 logger with:
 
     require 'aws-app-logger'
-    $logger = Aws::App::Logger.new
+    $logger = Aws::App::StructuredLogger.new
 
 ### Segment logging by application and environment
 
 Coming soon:
 
-    $logger = Aws::App::Logger.new(
+    $logger = Aws::App::StructuredLogger.new(
       application: 'Your App Name Here',
       environment: 'staging'
     )
