@@ -101,24 +101,32 @@ as the name of a log group in CloudWatch:
     $logger.info 'A message in a log stream in the log group my-log-group.'
     $logger.debug "Some important object that responsd to to_json:", @record
 
-### Suppress pretty printing
+### Pretty printing
 
-If you don't want the pretty-printed representation at the end, then you can
-use the `nopretty:true` option when you set up your logging:
+You can also log an optional pretty-printed representation that displays the
+class name, and it uses Awesome Print to render the object so that you can see
+array indexes and useful things like that.
 
-    nopretty:true
+You can enable pretty printing with the `nopretty:true` option when you set up
+your logging:
 
-### Segment logging by application and environment
+    require 'aws-app-logger'
+    $logger = Aws::App::Logger.new pretty:true
+    $logger.info 'Starting to process order.', @order.id
 
-Coming soon:
+Produces:
 
-    $logger = Aws::App::Logger.new(
-      application: 'Your App Name Here',
-      environment: 'staging'
-    )
-    ...
-    2022-10-12T16:20:45.891-05:00	DEBUG: Starting to process order.
-      {"message":"Starting to process order.", "application":"Your App Name Here", "environment":"staging", "id":"10012001","total":"1295","subtotal":"..."}
+    DEBUG: Starting to process order.
+      {"message":"Starting to process order.", "id":"1234","total":"4592","subtotal":"..."}
+      Hash
+      {
+              :id => "10102001",
+           :total => "1295",
+        :subtotal => "..."
+      }
+
+CloudWatch is good at parsing the JSON and displaying it for you, so you might
+never need this.
 
 ## Development
 
