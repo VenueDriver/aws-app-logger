@@ -5,6 +5,12 @@ require 'test_helper'
 require 'rainbow'
 require 'json'
 require 'aws-sdk-cloudwatchlogs'
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = "vcr_cassettes"
+  config.hook_into :webmock
+end
 
 class Aws::App::LoggerTest < Test::Unit::TestCase
   puts 'Test log message: ' + @@test_message =
@@ -83,28 +89,43 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     )
   end
 
+  # These tests use Cloudwatch.
+
   test 'log to CloudWatch using the name of a log group' do
-    assert Aws::App::Logger.
-      new('aws-app-logger-test').
-      debug(@@test_message, {id:'10102001', total:'1295', subtotal:'...'})
+    VCR.use_cassette(__method__, :match_requests_on => [:method]) do
+      assert Aws::App::Logger.
+        new('aws-app-logger-test').
+        debug(@@test_message, {id:'10102001', total:'1295', subtotal:'...'})
+    end
+  end
+
+  test 'logging more than once requires managing the sequence token' do
+    VCR.use_cassette(__method__, :match_requests_on => [:method]) do
+      logger = Aws::App::Logger.new('aws-app-logger-test')
+      assert logger.debug("1") && logger.debug("2")
+    end
   end
 
   # Implicit log group creation.
   test 'creates log group when one does not exist' do
-    log_group_name_that_does_not_exist =
-      'aws-app-logger-test-' +
-      (0...8).map { (65 + rand(26)).chr }.join
-    Aws::App::Logger.new log_group_name_that_does_not_exist
-    remove_log_group log_group_name_that_does_not_exist
+    VCR.use_cassette(__method__, :match_requests_on => [:method]) do
+      log_group_name_that_does_not_exist =
+        'aws-app-logger-test-' +
+        (0...8).map { (65 + rand(26)).chr }.join
+      Aws::App::Logger.new log_group_name_that_does_not_exist
+      remove_log_group log_group_name_that_does_not_exist
+    end
   end
 
   test 'finds a log group when one does exist' do
-    log_group_name_that_does_not_exist =
-      'aws-app-logger-test-' +
-      (0...8).map { (65 + rand(26)).chr }.join
-    Aws::App::Logger.new log_group_name_that_does_not_exist
-    Aws::App::Logger.new log_group_name_that_does_not_exist
-    remove_log_group log_group_name_that_does_not_exist
+    VCR.use_cassette(__method__, :match_requests_on => [:method]) do
+      log_group_name_that_does_not_exist =
+        'aws-app-logger-test-' +
+        (0...8).map { (65 + rand(26)).chr }.join
+      Aws::App::Logger.new log_group_name_that_does_not_exist
+      Aws::App::Logger.new log_group_name_that_does_not_exist
+      remove_log_group log_group_name_that_does_not_exist
+    end
   end
 
   def remove_log_group(name)
