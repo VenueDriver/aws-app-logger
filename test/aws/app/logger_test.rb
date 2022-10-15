@@ -7,6 +7,7 @@ require 'json'
 require 'aws-sdk-cloudwatchlogs'
 require 'vcr'
 
+ENV['AWS_REGION'] = 'us-east-1'
 VCR.configure do |config|
   config.cassette_library_dir = "#{__dir__}/../../vcr_cassettes"
   config.hook_into :webmock
