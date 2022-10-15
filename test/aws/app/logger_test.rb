@@ -4,12 +4,11 @@ require 'stringio'
 require 'test_helper'
 require 'rainbow'
 require 'json'
+require 'aws-sdk-cloudwatchlogs'
 
 class Aws::App::LoggerTest < Test::Unit::TestCase
   puts 'Test log message: ' + @@test_message =
-    Rainbow(' ¡Sierra! ').bright.magenta.bg(:white) +
-    ' 🌟 🐭 🌱 🦄 ' +
-    Rainbow(' SUCCESS ').green.bg(:black)
+      '¡Sierra! 🌟 🐭 🌱 🦄 SUCCESS'
 
   test 'VERSION' do
     assert do
@@ -18,7 +17,6 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
   end
 
   # Existing functionality from Logger, passed through.
-
   test 'output includes message' do
     $logger = Aws::App::Logger.new(output = StringIO.new)
     $logger.debug @@test_message
@@ -83,6 +81,12 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     assert(
       !( output.string =~ /\d\d\d\d\-\d\d\-\d\d/ )
     )
+  end
+
+  test 'log to CloudWatch using the name of a log group' do
+    assert Aws::App::Logger.
+      new('aws-app-logger-test').
+      debug(@@test_message, {id:'10102001', total:'1295', subtotal:'...'})
   end
 
 end

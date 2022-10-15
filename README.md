@@ -17,7 +17,7 @@ logs and search then in AWS CloudWatch:
 
     2022-10-12T16:20:45.891-05:00	DEBUG: Starting to process order: 1234
     2022-10-12T16:20:45.891-05:00	DEBUG: Order: {:id=>"1234", :total=>"4592", :subtotal=>"..." ... }
-    2022-10-12T16:20:47.369-05:00	DEBUG: Order: {:id=>"1234", :total=>"4592", :subtotal=>"..." ... }
+    2022-10-12T16:20:47.369-05:00	DEBUG: Order final: {:id=>"1234", :total=>"4592", :subtotal=>"..." ... }
 
 But, you could get more out of CloudWatch.  You could log your `@order` object
 as machine-readable data that you could
@@ -60,13 +60,15 @@ And instead of this in your CloudWatch logs:
 
 CloudWatch already provides a timestamp, so you don't need that.  The second,
 indented line of your log output is machine-readable JSON data, and after
-that is a human-readable, pretty-printed version for you to read.
+that is a human-readable, pretty-printed version for you to read.  CloudWatch will parse the JSON representation and index the things that it finds in it, and you can read the other part.
 
-Now, you can use AWS Log Insights to locate every `message` related to any
-specific order `id`, because both of those things are machine-readable and
-indexed.  You can also do queries for lifecycle events related to orders
-where the total was greater than X, or where the subtotal was exactly Y,
-or things that make sense within your application.
+Now, you can use AWS Log Insights to find log entries related to
+concepts in your application.  If you have an application with an "order" model that you care about, then you can query for log messages
+related to any given order `id`.  You can do queries based on attributes
+of your orders, like the total, subtotal, any special taxes that your
+application handles, etc.  You can search for log lines from orders as
+they closed where the total was above $X, for example.  Or where some
+tax line item was zero, when maybe it never should be.
 
 ## Installation
 
@@ -87,6 +89,18 @@ logger with:
     require 'aws-app-logger'
     $logger = Aws::App::Logger.new
 
+### Log directly to CloudWatch
+
+If you don't want to emit your log output to standard output, if you instead
+want to log directly to CloudWatch through the CloudWatch API, then you can
+provide a string when you create the `Logger` instance, and it will use that
+as the name of a log group in CloudWatch:
+
+    require 'aws-app-logger'
+    $logger = Aws::App::Logger.new 'my-log-group'
+    $logger.info 'A message in a log stream in the log group my-log-group.'
+    $logger.debug "Some important object that responsd to to_json:", @record
+
 ### Suppress pretty printing
 
 If you don't want the pretty-printed representation at the end, then you can
@@ -105,7 +119,6 @@ Coming soon:
     ...
     2022-10-12T16:20:45.891-05:00	DEBUG: Starting to process order.
       {"message":"Starting to process order.", "application":"Your App Name Here", "environment":"staging", "id":"10012001","total":"1295","subtotal":"..."}
-
 
 ## Development
 

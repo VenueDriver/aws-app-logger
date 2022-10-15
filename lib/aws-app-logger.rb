@@ -21,11 +21,23 @@ module Aws
         progname: nil, formatter: nil, datetime_format: nil,
         binmode: false, shift_period_suffix: '%Y%m%d',
         # Added for this class:
-        nopretty:false
+        nopretty:false, log_group:nil
       )
 
         # Handle the new things.
         self.nopretty = nopretty
+
+        if logdev.class.eql? String
+          log_group = logdev
+        end
+        if log_group
+          @log_group = find_or_create_log_group log_group_name:log_group
+          @log_stream = find_or_create_log_stream
+          logdev = CloudWatchStringIO.new(
+            cloudwatch_client: @cloudwatch,
+            log_group:         @log_group,
+            log_stream:        @log_stream)
+        end
 
         super(
           # The original interface (without the added things) copied and pasted:
@@ -53,7 +65,7 @@ module Aws
             "\n  " + (remainder = args.shift).to_json
           # Unless you suppress it, you'll also see your data pretty-printed.
           unless self.nopretty
-            message += ("\n#{remainder.class}\n#{remainder.ai}").gsub(/^/,'  ')
+            message += Rainbow.uncolor("\n#{remainder.class}\n#{remainder.ai}").gsub(/^/,'  ')
           end
           super(severity, nil, message, &block)
         end
@@ -63,6 +75,74 @@ module Aws
         define_method level.to_sym do |*args, &block|
           add(eval("::Logger::#{level.upcase}"), *args, &block)
         end
+      end
+
+      class NoLogStreamError < StandardError; end
+      class NoLogGroupError < StandardError; end
+
+      class CloudWatchStringIO < ::StringIO
+        def initialize(cloudwatch_client:, log_group:, log_stream:)
+          @cloudwatch     = cloudwatch_client
+          @log_group      = log_group
+          @log_stream     = log_stream
+          @sequence_token = log_stream.upload_sequence_token
+        end
+        def write(message)
+          log_event = {
+            log_group_name: @log_group.log_group_name,
+            log_stream_name: @log_stream.log_stream_name,
+            log_events: [{
+              timestamp: (Time.now.utc.to_f.round(3)*1000).to_i,
+              message: message
+            }]
+          }
+          if @sequence_token
+            log_event[:sequence_token] = @sequence_token
+          end
+          @cloudwatch.put_log_events(log_event).tap do |response|
+            @sequence_token = response.next_sequence_token
+          end.rejected_log_events_info.nil?
+        end
+      end
+
+      private
+
+      def find_or_create_log_group(log_group_name:)
+        @cloudwatch = Aws::CloudWatchLogs::Client.new
+        @log_group_name = log_group_name
+        response = @cloudwatch.describe_log_groups({
+          log_group_name_prefix: log_group_name,
+          limit: 1
+        })
+        response.log_groups.first.tap do |log_group|
+          raise NoLogGroupError if log_group.nil?
+        end
+      rescue NoLogGroupError
+        puts 'Creating log group:' + Rainbow(log_group_name).blue
+        @cloudwatch.create_log_group(log_group_name: log_group_name)
+        retry
+      end
+
+      def find_or_create_log_stream
+        log_stream_name =
+          # One log stream per minute, maximum...
+          Time.now.to_s.match( /^([^\:]+\d+)\:(\d+)/ ){
+            [$1, '%02d' % ($2.to_i - $2.to_i % 5)] }.join('-').gsub(/\D/,'-')
+        response = @cloudwatch.describe_log_streams({
+          log_group_name: @log_group_name,
+          log_stream_name_prefix: log_stream_name,
+          limit: 1
+        })
+        response.log_streams.first.tap do |log_stream|
+          raise NoLogStreamError if log_stream.nil?
+          @sequence_token = log_stream.upload_sequence_token
+        end
+      rescue NoLogStreamError
+        @cloudwatch.create_log_stream(
+          log_group_name: @log_group_name,
+          log_stream_name: log_stream_name
+        )
+        retry
       end
 
     end
