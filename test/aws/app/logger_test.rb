@@ -89,4 +89,29 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
       debug(@@test_message, {id:'10102001', total:'1295', subtotal:'...'})
   end
 
+  # Implicit log group creation.
+  test 'creates log group when one does not exist' do
+    log_group_name_that_does_not_exist =
+      'aws-app-logger-test-' +
+      (0...8).map { (65 + rand(26)).chr }.join
+    Aws::App::Logger.new log_group_name_that_does_not_exist
+    remove_log_group log_group_name_that_does_not_exist
+  end
+
+  test 'finds a log group when one does exist' do
+    log_group_name_that_does_not_exist =
+      'aws-app-logger-test-' +
+      (0...8).map { (65 + rand(26)).chr }.join
+    Aws::App::Logger.new log_group_name_that_does_not_exist
+    Aws::App::Logger.new log_group_name_that_does_not_exist
+    remove_log_group log_group_name_that_does_not_exist
+  end
+
+  def remove_log_group(name)
+    cloudwatch = Aws::CloudWatchLogs::Client.new
+    cloudwatch.delete_log_group(
+      log_group_name: name
+    )
+  end
+
 end
