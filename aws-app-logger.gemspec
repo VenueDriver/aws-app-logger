@@ -38,6 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rainbow', '~> 3.1', '>= 3.1.1'
   spec.add_dependency 'awesome_print', '1.9.2'
   spec.add_dependency 'aws-sdk-cloudwatchlogs', '~> 1.53'
+  spec.add_dependency 'simplecov', '~> 0.21.2'
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
