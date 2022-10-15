@@ -13,7 +13,7 @@ module Aws
     class Logger < ::Logger
 
       # Option to suppress pretty-printing strucutured data.
-      attr_accessor :nopretty
+      attr_accessor :pretty
 
       def initialize(
         # The original Logger interface:
@@ -21,11 +21,11 @@ module Aws
         progname: nil, formatter: nil, datetime_format: nil,
         binmode: false, shift_period_suffix: '%Y%m%d',
         # Added for this class:
-        nopretty:false, log_group:nil
+        pretty:false, log_group:nil
       )
 
         # Handle the new things.
-        self.nopretty = nopretty
+        self.pretty = pretty
 
         if logdev.class.eql? String
           log_group = logdev
@@ -62,10 +62,11 @@ module Aws
             # The first thing you pass becomes the first line of your message,
             args.shift +
             # and the second thing that you pass becomes a line of JSON data.
-            "\n  " + (remainder = args.shift).to_json
+            "\n  " + JSON.dump(remainder = args.shift)
           # Unless you suppress it, you'll also see your data pretty-printed.
-          unless self.nopretty
-            message += Rainbow.uncolor("\n#{remainder.class}\n#{remainder.ai}").gsub(/^/,'  ')
+          if self.pretty
+            message += Rainbow.uncolor(
+              "\n#{remainder.class}\n#{remainder.ai}").gsub(/^/,'  ')
           end
           super(severity, nil, message, &block)
         end

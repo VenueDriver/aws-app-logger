@@ -55,22 +55,22 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     )
   end
 
-  test 'logging an object includes pretty-printed version' do
+  test 'pretty-printed object representation not included by default' do
     $logger = Aws::App::Logger.new(output = StringIO.new)
     $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
     assert(
       output.string.include?(@@test_message) &&
-      Rainbow.uncolor(output.string).include?(':id => "10102001"')
+      ! Rainbow.uncolor(output.string).include?(':id => "10102001"')
     )
   end
 
-  test 'the nopretty option disables the pretty-printed version' do
+  test 'the pretty option enables the pretty-printed version' do
     $logger = Aws::App::Logger.new(output = StringIO.new,
-      nopretty:true)
+      pretty:true)
     $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
     assert(
       output.string.include?(@@test_message) &&
-      ! Rainbow.uncolor(output.string).include?(':id => "10102001"')
+      output.string.include?(':id => "10102001"')
     )
   end
 

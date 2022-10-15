@@ -16,5 +16,5 @@
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
 guard 'rake', :task => 'test' do
-  watch(%r{^.rb})
+  watch(%r{.rb$})
 end
