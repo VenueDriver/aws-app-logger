@@ -5,7 +5,7 @@ http_interactions:
     uri: https://logs.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: '{"logGroupNamePrefix":"aws-app-logger-test-XQNYPETK","limit":1}'
+      string: '{"logGroupNamePrefix":"aws-app-logger-test-ZJETKLID","limit":1}'
     headers:
       Accept-Encoding:
       - ''
@@ -16,15 +16,15 @@ http_interactions:
       X-Amz-Target:
       - Logs_20140328.DescribeLogGroups
       X-Amz-Date:
-      - 20221015T210326Z
+      - 20221015T212615Z
       X-Amz-Security-Token:
       - IQoJb3JpZ2luX2VjEA8aCXVzLWVhc3QtMSJIMEYCIQCJVAxIBsVxh3ZVwEaJhzd+Lq8GZIL4UkpcAy3nTDuCiAIhAO/OQ52wsAkzvMXw+5c4uGbkh0A7PJjywCnlz/LgdnmeKqMDCNj//////////wEQABoMMzMwNzMxMjQzMzAwIgwVKAtqlQxaeScX5bQq9wILyB8x+SuzpxJ4JUqjxKPMLbprYasXD9oVvTVO01cM6gJOIax64eWyWo/Xh0Sev+gZlqJ+hMuCmFLknKmR7r2Or8QA5HC93Ee/+MOjkExWj4KufT3y5oHIuiiO0qAs/44ZHZ8a4D1AkQ6acvOyFL/d1neh/Ukg46i6udVRHrMl55OTWKCwsvljv+m5d6XHjSMahMTHDL3EU0hol0M82UqtaCO7YMIehuEZNHWa4scKHMWibQVeldN7hqypBch3V4gIYpbr+o95s47K9B1zE7Hx3V81Uxb/oXNtmHhEsBHJJBkAzuWfx8+bwUJHx3ocz5E5/yljz3po0ffrtnXuDp7oqb6aTAllHZMqgAngB2I6LwWbDQAk3eD8OwaqRsXNjoVMBPNVwIxq/wm4KEJ4LClblNvJeMIXNP3MF9rAIU9ZBP5Ex4U+AsfeKbXhvieHvkZJoqpBVLdG9K8zy95OvNQBC1omIifvNnxOoyco7oRYRiFtUPoFMbUw+Y6rmgY6pQFZdidWNNkt43Nap9K/0pHYPQSsE5U7Akdpt72+3SH+HNE+2CaSd6zlRiMvFhKo2fuNlM/v928PB89EnFQwNdY9wtnemeAK/VX7EdYVxJhyQtI9/4ZyS6v8opaqKhaUiiL2FVGo2rJ7Jo08CKkj3WyikvEnm5s9sZcMlhZpIOGjv7yg2obL3YbbuE5tr6DSt2rZOo2tpDjvStPGPb4qsArD15jL2sY=
       X-Amz-Content-Sha256:
-      - 75b4760cad393813e2b86f076c23ada60bf1a359eef40fe97e161eddbdd6b41e
+      - 2c4d02be04543252a1b1f4f92ad1566fcf26ca50cb2cc83b04e86294b3627ef0
       Authorization:
       - AWS4-HMAC-SHA256 Credential=ASIAU2AI6I4SFSPSAJ6I/20221015/us-east-1/logs/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
-        Signature=ae52c0cbb02438a2a32830a9053fa69c165959cd77cf846766567d9981a7f367
+        Signature=1e691fc13b7ca91de8afa72dfd03e4893c0de4af4365106765ec871618bf8c48
       Content-Length:
       - '63'
       Accept:
@@ -35,23 +35,23 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 50543570-5b9e-44e6-9065-283734e8f45d
+      - 7cd8967e-ef34-41ec-97d7-064603d9cb09
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '16'
       Date:
-      - Sat, 15 Oct 2022 21:03:26 GMT
+      - Sat, 15 Oct 2022 21:26:15 GMT
     body:
       encoding: UTF-8
       string: '{"logGroups":[]}'
-  recorded_at: Sat, 15 Oct 2022 21:03:26 GMT
+  recorded_at: Sat, 15 Oct 2022 21:26:15 GMT
 - request:
     method: post
     uri: https://logs.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: '{"logGroupName":"aws-app-logger-test-XQNYPETK"}'
+      string: '{"logGroupName":"aws-app-logger-test-ZJETKLID"}'
     headers:
       Accept-Encoding:
       - ''
@@ -62,15 +62,15 @@ http_interactions:
       X-Amz-Target:
       - Logs_20140328.CreateLogGroup
       X-Amz-Date:
-      - 20221015T210326Z
+      - 20221015T212615Z
       X-Amz-Security-Token:
       - IQoJb3JpZ2luX2VjEA8aCXVzLWVhc3QtMSJIMEYCIQCJVAxIBsVxh3ZVwEaJhzd+Lq8GZIL4UkpcAy3nTDuCiAIhAO/OQ52wsAkzvMXw+5c4uGbkh0A7PJjywCnlz/LgdnmeKqMDCNj//////////wEQABoMMzMwNzMxMjQzMzAwIgwVKAtqlQxaeScX5bQq9wILyB8x+SuzpxJ4JUqjxKPMLbprYasXD9oVvTVO01cM6gJOIax64eWyWo/Xh0Sev+gZlqJ+hMuCmFLknKmR7r2Or8QA5HC93Ee/+MOjkExWj4KufT3y5oHIuiiO0qAs/44ZHZ8a4D1AkQ6acvOyFL/d1neh/Ukg46i6udVRHrMl55OTWKCwsvljv+m5d6XHjSMahMTHDL3EU0hol0M82UqtaCO7YMIehuEZNHWa4scKHMWibQVeldN7hqypBch3V4gIYpbr+o95s47K9B1zE7Hx3V81Uxb/oXNtmHhEsBHJJBkAzuWfx8+bwUJHx3ocz5E5/yljz3po0ffrtnXuDp7oqb6aTAllHZMqgAngB2I6LwWbDQAk3eD8OwaqRsXNjoVMBPNVwIxq/wm4KEJ4LClblNvJeMIXNP3MF9rAIU9ZBP5Ex4U+AsfeKbXhvieHvkZJoqpBVLdG9K8zy95OvNQBC1omIifvNnxOoyco7oRYRiFtUPoFMbUw+Y6rmgY6pQFZdidWNNkt43Nap9K/0pHYPQSsE5U7Akdpt72+3SH+HNE+2CaSd6zlRiMvFhKo2fuNlM/v928PB89EnFQwNdY9wtnemeAK/VX7EdYVxJhyQtI9/4ZyS6v8opaqKhaUiiL2FVGo2rJ7Jo08CKkj3WyikvEnm5s9sZcMlhZpIOGjv7yg2obL3YbbuE5tr6DSt2rZOo2tpDjvStPGPb4qsArD15jL2sY=
       X-Amz-Content-Sha256:
-      - 05b95686c410c0bd7f2a909ae33f4156c0201d35df1c486028edf4d6ca629f57
+      - 2d8f3ba7b236ca88319e7c8fc6ec85982a43dd15134798cfc41bfa62d9500bc8
       Authorization:
       - AWS4-HMAC-SHA256 Credential=ASIAU2AI6I4SFSPSAJ6I/20221015/us-east-1/logs/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
-        Signature=e36d46a6320249fa2f5bfc5f62ba6104cac13d0c2e2360f23419acfe4d98eac8
+        Signature=c751530b2f8b4e5265caa33734f81420b57988427a45637fc4bea620345bdc28
       Content-Length:
       - '47'
       Accept:
@@ -81,23 +81,23 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - b614bc23-7344-439e-b7e9-d41c79365c23
+      - 1354cc09-0f61-46ac-9191-9cddcb7fb485
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '0'
       Date:
-      - Sat, 15 Oct 2022 21:03:26 GMT
+      - Sat, 15 Oct 2022 21:26:15 GMT
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Sat, 15 Oct 2022 21:03:26 GMT
+  recorded_at: Sat, 15 Oct 2022 21:26:15 GMT
 - request:
     method: post
     uri: https://logs.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: '{"logGroupNamePrefix":"aws-app-logger-test-XQNYPETK","limit":1}'
+      string: '{"logGroupNamePrefix":"aws-app-logger-test-ZJETKLID","limit":1}'
     headers:
       Accept-Encoding:
       - ''
@@ -108,15 +108,15 @@ http_interactions:
       X-Amz-Target:
       - Logs_20140328.DescribeLogGroups
       X-Amz-Date:
-      - 20221015T210326Z
+      - 20221015T212615Z
       X-Amz-Security-Token:
       - IQoJb3JpZ2luX2VjEA8aCXVzLWVhc3QtMSJIMEYCIQCJVAxIBsVxh3ZVwEaJhzd+Lq8GZIL4UkpcAy3nTDuCiAIhAO/OQ52wsAkzvMXw+5c4uGbkh0A7PJjywCnlz/LgdnmeKqMDCNj//////////wEQABoMMzMwNzMxMjQzMzAwIgwVKAtqlQxaeScX5bQq9wILyB8x+SuzpxJ4JUqjxKPMLbprYasXD9oVvTVO01cM6gJOIax64eWyWo/Xh0Sev+gZlqJ+hMuCmFLknKmR7r2Or8QA5HC93Ee/+MOjkExWj4KufT3y5oHIuiiO0qAs/44ZHZ8a4D1AkQ6acvOyFL/d1neh/Ukg46i6udVRHrMl55OTWKCwsvljv+m5d6XHjSMahMTHDL3EU0hol0M82UqtaCO7YMIehuEZNHWa4scKHMWibQVeldN7hqypBch3V4gIYpbr+o95s47K9B1zE7Hx3V81Uxb/oXNtmHhEsBHJJBkAzuWfx8+bwUJHx3ocz5E5/yljz3po0ffrtnXuDp7oqb6aTAllHZMqgAngB2I6LwWbDQAk3eD8OwaqRsXNjoVMBPNVwIxq/wm4KEJ4LClblNvJeMIXNP3MF9rAIU9ZBP5Ex4U+AsfeKbXhvieHvkZJoqpBVLdG9K8zy95OvNQBC1omIifvNnxOoyco7oRYRiFtUPoFMbUw+Y6rmgY6pQFZdidWNNkt43Nap9K/0pHYPQSsE5U7Akdpt72+3SH+HNE+2CaSd6zlRiMvFhKo2fuNlM/v928PB89EnFQwNdY9wtnemeAK/VX7EdYVxJhyQtI9/4ZyS6v8opaqKhaUiiL2FVGo2rJ7Jo08CKkj3WyikvEnm5s9sZcMlhZpIOGjv7yg2obL3YbbuE5tr6DSt2rZOo2tpDjvStPGPb4qsArD15jL2sY=
       X-Amz-Content-Sha256:
-      - 75b4760cad393813e2b86f076c23ada60bf1a359eef40fe97e161eddbdd6b41e
+      - 2c4d02be04543252a1b1f4f92ad1566fcf26ca50cb2cc83b04e86294b3627ef0
       Authorization:
       - AWS4-HMAC-SHA256 Credential=ASIAU2AI6I4SFSPSAJ6I/20221015/us-east-1/logs/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
-        Signature=ae52c0cbb02438a2a32830a9053fa69c165959cd77cf846766567d9981a7f367
+        Signature=1e691fc13b7ca91de8afa72dfd03e4893c0de4af4365106765ec871618bf8c48
       Content-Length:
       - '63'
       Accept:
@@ -127,23 +127,23 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 5563fcd2-5adc-44bc-97c4-1d788d53e15c
+      - 5856b296-0076-450d-bb41-854e89766bed
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '215'
       Date:
-      - Sat, 15 Oct 2022 21:03:26 GMT
+      - Sat, 15 Oct 2022 21:26:15 GMT
     body:
       encoding: UTF-8
-      string: '{"logGroups":[{"arn":"arn:aws:logs:us-east-1:330731243300:log-group:aws-app-logger-test-XQNYPETK:*","creationTime":1665867806947,"logGroupName":"aws-app-logger-test-XQNYPETK","metricFilterCount":0,"storedBytes":0}]}'
-  recorded_at: Sat, 15 Oct 2022 21:03:26 GMT
+      string: '{"logGroups":[{"arn":"arn:aws:logs:us-east-1:330731243300:log-group:aws-app-logger-test-ZJETKLID:*","creationTime":1665869175848,"logGroupName":"aws-app-logger-test-ZJETKLID","metricFilterCount":0,"storedBytes":0}]}'
+  recorded_at: Sat, 15 Oct 2022 21:26:15 GMT
 - request:
     method: post
     uri: https://logs.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: '{"logGroupName":"aws-app-logger-test-XQNYPETK","logStreamNamePrefix":"2022-10-15-21-00","limit":1}'
+      string: '{"logGroupName":"aws-app-logger-test-ZJETKLID","logStreamNamePrefix":"2022-10-15-21-25","limit":1}'
     headers:
       Accept-Encoding:
       - ''
@@ -154,15 +154,15 @@ http_interactions:
       X-Amz-Target:
       - Logs_20140328.DescribeLogStreams
       X-Amz-Date:
-      - 20221015T210326Z
+      - 20221015T212615Z
       X-Amz-Security-Token:
       - IQoJb3JpZ2luX2VjEA8aCXVzLWVhc3QtMSJIMEYCIQCJVAxIBsVxh3ZVwEaJhzd+Lq8GZIL4UkpcAy3nTDuCiAIhAO/OQ52wsAkzvMXw+5c4uGbkh0A7PJjywCnlz/LgdnmeKqMDCNj//////////wEQABoMMzMwNzMxMjQzMzAwIgwVKAtqlQxaeScX5bQq9wILyB8x+SuzpxJ4JUqjxKPMLbprYasXD9oVvTVO01cM6gJOIax64eWyWo/Xh0Sev+gZlqJ+hMuCmFLknKmR7r2Or8QA5HC93Ee/+MOjkExWj4KufT3y5oHIuiiO0qAs/44ZHZ8a4D1AkQ6acvOyFL/d1neh/Ukg46i6udVRHrMl55OTWKCwsvljv+m5d6XHjSMahMTHDL3EU0hol0M82UqtaCO7YMIehuEZNHWa4scKHMWibQVeldN7hqypBch3V4gIYpbr+o95s47K9B1zE7Hx3V81Uxb/oXNtmHhEsBHJJBkAzuWfx8+bwUJHx3ocz5E5/yljz3po0ffrtnXuDp7oqb6aTAllHZMqgAngB2I6LwWbDQAk3eD8OwaqRsXNjoVMBPNVwIxq/wm4KEJ4LClblNvJeMIXNP3MF9rAIU9ZBP5Ex4U+AsfeKbXhvieHvkZJoqpBVLdG9K8zy95OvNQBC1omIifvNnxOoyco7oRYRiFtUPoFMbUw+Y6rmgY6pQFZdidWNNkt43Nap9K/0pHYPQSsE5U7Akdpt72+3SH+HNE+2CaSd6zlRiMvFhKo2fuNlM/v928PB89EnFQwNdY9wtnemeAK/VX7EdYVxJhyQtI9/4ZyS6v8opaqKhaUiiL2FVGo2rJ7Jo08CKkj3WyikvEnm5s9sZcMlhZpIOGjv7yg2obL3YbbuE5tr6DSt2rZOo2tpDjvStPGPb4qsArD15jL2sY=
       X-Amz-Content-Sha256:
-      - cb7a1f01ed8087a243756e0e11747e803d547cfbe2db410e813d08015b1f073d
+      - 752b69c15104a7eb9d36040cc0b4409ac52c5c275dbfaafdfac0141ab583e94e
       Authorization:
       - AWS4-HMAC-SHA256 Credential=ASIAU2AI6I4SFSPSAJ6I/20221015/us-east-1/logs/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
-        Signature=513971a5c3effbe6d0f5bcb4e578ea3f1cd495cad55050859bb1ed6f6ca9b665
+        Signature=18754154f78404c327c0c21a4387421ab7019a2b001e1b8b899a548e9414b05f
       Content-Length:
       - '98'
       Accept:
@@ -173,23 +173,23 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - f8f5b7f1-c31e-4863-b01d-c9ab6fec3a46
+      - d928f7e1-a927-4b48-8622-29417a083eb9
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '17'
       Date:
-      - Sat, 15 Oct 2022 21:03:26 GMT
+      - Sat, 15 Oct 2022 21:26:15 GMT
     body:
       encoding: UTF-8
       string: '{"logStreams":[]}'
-  recorded_at: Sat, 15 Oct 2022 21:03:26 GMT
+  recorded_at: Sat, 15 Oct 2022 21:26:15 GMT
 - request:
     method: post
     uri: https://logs.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: '{"logGroupName":"aws-app-logger-test-XQNYPETK","logStreamName":"2022-10-15-21-00"}'
+      string: '{"logGroupName":"aws-app-logger-test-ZJETKLID","logStreamName":"2022-10-15-21-25"}'
     headers:
       Accept-Encoding:
       - ''
@@ -200,15 +200,15 @@ http_interactions:
       X-Amz-Target:
       - Logs_20140328.CreateLogStream
       X-Amz-Date:
-      - 20221015T210326Z
+      - 20221015T212615Z
       X-Amz-Security-Token:
       - IQoJb3JpZ2luX2VjEA8aCXVzLWVhc3QtMSJIMEYCIQCJVAxIBsVxh3ZVwEaJhzd+Lq8GZIL4UkpcAy3nTDuCiAIhAO/OQ52wsAkzvMXw+5c4uGbkh0A7PJjywCnlz/LgdnmeKqMDCNj//////////wEQABoMMzMwNzMxMjQzMzAwIgwVKAtqlQxaeScX5bQq9wILyB8x+SuzpxJ4JUqjxKPMLbprYasXD9oVvTVO01cM6gJOIax64eWyWo/Xh0Sev+gZlqJ+hMuCmFLknKmR7r2Or8QA5HC93Ee/+MOjkExWj4KufT3y5oHIuiiO0qAs/44ZHZ8a4D1AkQ6acvOyFL/d1neh/Ukg46i6udVRHrMl55OTWKCwsvljv+m5d6XHjSMahMTHDL3EU0hol0M82UqtaCO7YMIehuEZNHWa4scKHMWibQVeldN7hqypBch3V4gIYpbr+o95s47K9B1zE7Hx3V81Uxb/oXNtmHhEsBHJJBkAzuWfx8+bwUJHx3ocz5E5/yljz3po0ffrtnXuDp7oqb6aTAllHZMqgAngB2I6LwWbDQAk3eD8OwaqRsXNjoVMBPNVwIxq/wm4KEJ4LClblNvJeMIXNP3MF9rAIU9ZBP5Ex4U+AsfeKbXhvieHvkZJoqpBVLdG9K8zy95OvNQBC1omIifvNnxOoyco7oRYRiFtUPoFMbUw+Y6rmgY6pQFZdidWNNkt43Nap9K/0pHYPQSsE5U7Akdpt72+3SH+HNE+2CaSd6zlRiMvFhKo2fuNlM/v928PB89EnFQwNdY9wtnemeAK/VX7EdYVxJhyQtI9/4ZyS6v8opaqKhaUiiL2FVGo2rJ7Jo08CKkj3WyikvEnm5s9sZcMlhZpIOGjv7yg2obL3YbbuE5tr6DSt2rZOo2tpDjvStPGPb4qsArD15jL2sY=
       X-Amz-Content-Sha256:
-      - 3a36cb3290a205187a2556710ce664db8d773607d29aca59988c4b2a9affb1ed
+      - 8db6b4b882b646aa4bcea8c1443dbd4bc15f6e070e1c028c8afcf8e25c8cba5e
       Authorization:
       - AWS4-HMAC-SHA256 Credential=ASIAU2AI6I4SFSPSAJ6I/20221015/us-east-1/logs/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
-        Signature=212f5a785bf6a096347ef3371a3bee28c10685b0c62b3ce40acc623ae5ac1989
+        Signature=5462ab188e53d5720da28bed1bc5bb61c1a1ab558670604d5a7d382f95a18a0a
       Content-Length:
       - '82'
       Accept:
@@ -219,23 +219,23 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 5baeacc1-c234-44df-88e3-edabd13627dc
+      - 2d8aeb6b-b291-425e-853b-cb89cae9eda0
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '0'
       Date:
-      - Sat, 15 Oct 2022 21:03:26 GMT
+      - Sat, 15 Oct 2022 21:26:15 GMT
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Sat, 15 Oct 2022 21:03:27 GMT
+  recorded_at: Sat, 15 Oct 2022 21:26:15 GMT
 - request:
     method: post
     uri: https://logs.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: '{"logGroupName":"aws-app-logger-test-XQNYPETK","logStreamNamePrefix":"2022-10-15-21-00","limit":1}'
+      string: '{"logGroupName":"aws-app-logger-test-ZJETKLID","logStreamNamePrefix":"2022-10-15-21-25","limit":1}'
     headers:
       Accept-Encoding:
       - ''
@@ -246,15 +246,15 @@ http_interactions:
       X-Amz-Target:
       - Logs_20140328.DescribeLogStreams
       X-Amz-Date:
-      - 20221015T210327Z
+      - 20221015T212615Z
       X-Amz-Security-Token:
       - IQoJb3JpZ2luX2VjEA8aCXVzLWVhc3QtMSJIMEYCIQCJVAxIBsVxh3ZVwEaJhzd+Lq8GZIL4UkpcAy3nTDuCiAIhAO/OQ52wsAkzvMXw+5c4uGbkh0A7PJjywCnlz/LgdnmeKqMDCNj//////////wEQABoMMzMwNzMxMjQzMzAwIgwVKAtqlQxaeScX5bQq9wILyB8x+SuzpxJ4JUqjxKPMLbprYasXD9oVvTVO01cM6gJOIax64eWyWo/Xh0Sev+gZlqJ+hMuCmFLknKmR7r2Or8QA5HC93Ee/+MOjkExWj4KufT3y5oHIuiiO0qAs/44ZHZ8a4D1AkQ6acvOyFL/d1neh/Ukg46i6udVRHrMl55OTWKCwsvljv+m5d6XHjSMahMTHDL3EU0hol0M82UqtaCO7YMIehuEZNHWa4scKHMWibQVeldN7hqypBch3V4gIYpbr+o95s47K9B1zE7Hx3V81Uxb/oXNtmHhEsBHJJBkAzuWfx8+bwUJHx3ocz5E5/yljz3po0ffrtnXuDp7oqb6aTAllHZMqgAngB2I6LwWbDQAk3eD8OwaqRsXNjoVMBPNVwIxq/wm4KEJ4LClblNvJeMIXNP3MF9rAIU9ZBP5Ex4U+AsfeKbXhvieHvkZJoqpBVLdG9K8zy95OvNQBC1omIifvNnxOoyco7oRYRiFtUPoFMbUw+Y6rmgY6pQFZdidWNNkt43Nap9K/0pHYPQSsE5U7Akdpt72+3SH+HNE+2CaSd6zlRiMvFhKo2fuNlM/v928PB89EnFQwNdY9wtnemeAK/VX7EdYVxJhyQtI9/4ZyS6v8opaqKhaUiiL2FVGo2rJ7Jo08CKkj3WyikvEnm5s9sZcMlhZpIOGjv7yg2obL3YbbuE5tr6DSt2rZOo2tpDjvStPGPb4qsArD15jL2sY=
       X-Amz-Content-Sha256:
-      - cb7a1f01ed8087a243756e0e11747e803d547cfbe2db410e813d08015b1f073d
+      - 752b69c15104a7eb9d36040cc0b4409ac52c5c275dbfaafdfac0141ab583e94e
       Authorization:
       - AWS4-HMAC-SHA256 Credential=ASIAU2AI6I4SFSPSAJ6I/20221015/us-east-1/logs/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
-        Signature=ad08e0898f3ebfe9f613f21f1e0966e81c22e30ecc577b7feafbc96585043cc4
+        Signature=18754154f78404c327c0c21a4387421ab7019a2b001e1b8b899a548e9414b05f
       Content-Length:
       - '98'
       Accept:
@@ -265,23 +265,23 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - 6c4792e2-3196-43a8-985e-788d2b5b719a
+      - ba1dc7e9-c4fa-4693-9e2e-0608f8dbbca3
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '209'
       Date:
-      - Sat, 15 Oct 2022 21:03:26 GMT
+      - Sat, 15 Oct 2022 21:26:15 GMT
     body:
       encoding: UTF-8
-      string: '{"logStreams":[{"arn":"arn:aws:logs:us-east-1:330731243300:log-group:aws-app-logger-test-XQNYPETK:log-stream:2022-10-15-21-00","creationTime":1665867807016,"logStreamName":"2022-10-15-21-00","storedBytes":0}]}'
-  recorded_at: Sat, 15 Oct 2022 21:03:27 GMT
+      string: '{"logStreams":[{"arn":"arn:aws:logs:us-east-1:330731243300:log-group:aws-app-logger-test-ZJETKLID:log-stream:2022-10-15-21-25","creationTime":1665869175918,"logStreamName":"2022-10-15-21-25","storedBytes":0}]}'
+  recorded_at: Sat, 15 Oct 2022 21:26:15 GMT
 - request:
     method: post
     uri: https://logs.us-east-1.amazonaws.com/
     body:
       encoding: UTF-8
-      string: '{"logGroupName":"aws-app-logger-test-XQNYPETK"}'
+      string: '{"logGroupName":"aws-app-logger-test-ZJETKLID"}'
     headers:
       Accept-Encoding:
       - ''
@@ -292,15 +292,15 @@ http_interactions:
       X-Amz-Target:
       - Logs_20140328.DeleteLogGroup
       X-Amz-Date:
-      - 20221015T210327Z
+      - 20221015T212615Z
       X-Amz-Security-Token:
       - IQoJb3JpZ2luX2VjEA8aCXVzLWVhc3QtMSJIMEYCIQCJVAxIBsVxh3ZVwEaJhzd+Lq8GZIL4UkpcAy3nTDuCiAIhAO/OQ52wsAkzvMXw+5c4uGbkh0A7PJjywCnlz/LgdnmeKqMDCNj//////////wEQABoMMzMwNzMxMjQzMzAwIgwVKAtqlQxaeScX5bQq9wILyB8x+SuzpxJ4JUqjxKPMLbprYasXD9oVvTVO01cM6gJOIax64eWyWo/Xh0Sev+gZlqJ+hMuCmFLknKmR7r2Or8QA5HC93Ee/+MOjkExWj4KufT3y5oHIuiiO0qAs/44ZHZ8a4D1AkQ6acvOyFL/d1neh/Ukg46i6udVRHrMl55OTWKCwsvljv+m5d6XHjSMahMTHDL3EU0hol0M82UqtaCO7YMIehuEZNHWa4scKHMWibQVeldN7hqypBch3V4gIYpbr+o95s47K9B1zE7Hx3V81Uxb/oXNtmHhEsBHJJBkAzuWfx8+bwUJHx3ocz5E5/yljz3po0ffrtnXuDp7oqb6aTAllHZMqgAngB2I6LwWbDQAk3eD8OwaqRsXNjoVMBPNVwIxq/wm4KEJ4LClblNvJeMIXNP3MF9rAIU9ZBP5Ex4U+AsfeKbXhvieHvkZJoqpBVLdG9K8zy95OvNQBC1omIifvNnxOoyco7oRYRiFtUPoFMbUw+Y6rmgY6pQFZdidWNNkt43Nap9K/0pHYPQSsE5U7Akdpt72+3SH+HNE+2CaSd6zlRiMvFhKo2fuNlM/v928PB89EnFQwNdY9wtnemeAK/VX7EdYVxJhyQtI9/4ZyS6v8opaqKhaUiiL2FVGo2rJ7Jo08CKkj3WyikvEnm5s9sZcMlhZpIOGjv7yg2obL3YbbuE5tr6DSt2rZOo2tpDjvStPGPb4qsArD15jL2sY=
       X-Amz-Content-Sha256:
-      - 05b95686c410c0bd7f2a909ae33f4156c0201d35df1c486028edf4d6ca629f57
+      - 2d8f3ba7b236ca88319e7c8fc6ec85982a43dd15134798cfc41bfa62d9500bc8
       Authorization:
       - AWS4-HMAC-SHA256 Credential=ASIAU2AI6I4SFSPSAJ6I/20221015/us-east-1/logs/aws4_request,
         SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token;x-amz-target,
-        Signature=61c9b351a376933d462a34cbf124e752658c749cd2faac0cab540f2fe5767fd8
+        Signature=5803281d9189947836084a3c15904e8c95062a0f98d757df45d36eb6ceb92b03
       Content-Length:
       - '47'
       Accept:
@@ -311,15 +311,15 @@ http_interactions:
       message: OK
     headers:
       X-Amzn-Requestid:
-      - a8a4d12e-5611-44b9-b023-7ca20602f77b
+      - 00dc6590-6b38-42a6-99c9-002e5bc66a04
       Content-Type:
       - application/x-amz-json-1.1
       Content-Length:
       - '0'
       Date:
-      - Sat, 15 Oct 2022 21:03:26 GMT
+      - Sat, 15 Oct 2022 21:26:15 GMT
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Sat, 15 Oct 2022 21:03:27 GMT
+  recorded_at: Sat, 15 Oct 2022 21:26:15 GMT
 recorded_with: VCR 6.1.0
