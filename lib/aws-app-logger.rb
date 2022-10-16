@@ -119,7 +119,6 @@ module Aws
           raise NoLogGroupError if log_group.nil?
         end
       rescue NoLogGroupError
-        puts 'Creating log group:' + Rainbow(log_group_name).blue
         @cloudwatch.create_log_group(log_group_name: log_group_name)
         retry
       end
