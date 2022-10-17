@@ -62,6 +62,18 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     )
   end
 
+  test 'logging more than one object as JSON with debug' do
+    $logger = Aws::App::Logger.new(output = StringIO.new)
+    $logger.debug @@test_message,
+      {action:'sale'},
+      {id:'10102001', total:'1295', subtotal:'...'}
+    assert(
+      output.string.include?(@@test_message) &&
+      JSON.parse(output.string.split("\n")[1])[0]['action'].eql?('sale') &&
+      JSON.parse(output.string.split("\n")[1])[1]['id'].eql?('10102001')
+    )
+  end
+
   test 'pretty-printed object representation not included by default' do
     $logger = Aws::App::Logger.new(output = StringIO.new)
     $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
@@ -128,6 +140,20 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
       remove_log_group log_group_name_that_does_not_exist
     end
   end
+
+  # Tests that use CloudWatch Log Insights.
+  # test 'finds log entries using structured data' do
+  #   VCR.use_cassette(__method__, :match_requests_on => [:method]) do
+  #     logger = Aws::App::Logger.new('aws-app-logger-test')
+  #     100.times do |i|
+  #       total = rand(10000)
+  #       logger.debug('order-completed',
+  #         {id:'10102001', total:total, subtotal:'...'})
+  #     end
+  #   end
+  # end
+
+  private
 
   def remove_log_group(name)
     cloudwatch = Aws::CloudWatchLogs::Client.new

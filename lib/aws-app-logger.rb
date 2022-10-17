@@ -60,9 +60,12 @@ module Aws
           # This is when you pass an object in addition to your message.
           message =
             # The first thing you pass becomes the first line of your message,
-            args.shift +
-            # and the second thing that you pass becomes a line of JSON data.
-            "\n  " + JSON.dump(remainder = args.shift)
+            args.shift
+          # ...and the second thing that you pass becomes a line of JSON data.
+          if (remainder = args).count.eql? 1
+            remainder = remainder.first
+          end
+          message += "\n  " + JSON.dump(remainder)
           # Unless you suppress it, you'll also see your data pretty-printed.
           if self.pretty
             message += Rainbow.uncolor(
