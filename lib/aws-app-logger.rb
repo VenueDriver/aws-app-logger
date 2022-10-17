@@ -52,27 +52,35 @@ module Aws
       end
 
       def add(severity, *args, &block)
-        case args.count
-        when 1
-          # This is the old style of logging, where there is one message.
-          super(severity, args.first, &block)
-        else
-          # This is when you pass an object in addition to your message.
-          message =
-            # The first thing you pass becomes the first line of your message,
-            args.shift
-          # ...and the second thing that you pass becomes a line of JSON data.
-          if (remainder = args).count.eql? 1
-            remainder = remainder.first
-          end
-          message += "\n  " + JSON.dump(remainder)
-          # Unless you suppress it, you'll also see your data pretty-printed.
-          if self.pretty
-            message += Rainbow.uncolor(
-              "\n#{remainder.class}\n#{remainder.ai}").gsub(/^/,'  ')
-          end
-          super(severity, nil, message, &block)
+        # This is the old style of logging, where there is one message and it's
+        # an ordinary String, not structured data.
+        if args.count.eql?(1) and args.first.class.eql?(String)
+          return super(severity, args.first, &block)
         end
+
+        message =
+          # Pull out the first argument if it's String, and start the message.
+          if args.first.class.eql?(String)
+            args.shift +
+            # Indent the JSON line when there is a string message.
+            "\n  "
+          else
+            # If it's not a string then leave the arguments in place,
+            # and the first argument will be emitted as JSON.
+            '' 
+          end
+
+        # ...and the second thing that you pass becomes a line of JSON data.
+        if (remainder = args).count.eql?(1)
+          remainder = remainder.first
+        end
+        message += JSON.dump(remainder)
+        # Unless you suppress it, you'll also see your data pretty-printed.
+        if self.pretty
+          message += Rainbow.uncolor(
+            "\n#{remainder.class}\n#{remainder.ai}").gsub(/^/,'  ')
+        end
+        super(severity, nil, message, &block)
       end
 
       %w{debug info warn error fatal unknown}.each do |level|

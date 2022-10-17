@@ -74,6 +74,19 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     )
   end
 
+  test 'logging all objects with no string' do
+    $logger = Aws::App::Logger.new(output = StringIO.new)
+    $logger.debug(
+      {action:'sale'},
+      {id:'10102001', total:'1295', subtotal:'...'}
+    )
+    assert(
+      (data = JSON.parse(output.string.split(/^[\S]+\s/)[1])).first['action'].
+        eql?('sale') &&
+      data.last['id'].eql?('10102001')
+    )
+  end
+
   test 'pretty-printed object representation not included by default' do
     $logger = Aws::App::Logger.new(output = StringIO.new)
     $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
@@ -141,13 +154,18 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     end
   end
 
-  # Tests that use CloudWatch Log Insights.
+  # WIP: Tests that use CloudWatch Log Insights.
+  # This is complicated because CloudWatch doesn't parse the JSON from
+  # log entries made directly to CloudWatch.  Lambda parses the JSON from
+  # log entries that you send through Lambda, but you have to add your own
+  # tags to the log entries yourself if you send the log entry directly.
   # test 'finds log entries using structured data' do
   #   VCR.use_cassette(__method__, :match_requests_on => [:method]) do
   #     logger = Aws::App::Logger.new('aws-app-logger-test')
   #     100.times do |i|
   #       total = rand(10000)
   #       logger.debug('order-completed',
+  #         {'action':'order-completed'},
   #         {id:'10102001', total:total, subtotal:'...'})
   #     end
   #   end
