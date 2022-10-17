@@ -4,6 +4,8 @@ This Ruby gem will emit log messages the way you normally do from Ruby,
 but leverage the power of AWS CloudWatch, with metrics, alerts, Log Insights,
 visualization, and more.
 
+## Familiar logginer interface
+
 You might have a lot of Ruby code that's already full of log statements that
 use the standard Logger class, like this:
 
@@ -18,6 +20,8 @@ logs and search then in AWS CloudWatch:
     2022-10-12T16:20:45.891-05:00	DEBUG: Starting to process order: 1234
     2022-10-12T16:20:45.891-05:00	DEBUG: Order: {:id=>"1234", :total=>"4592", :subtotal=>"..." ... }
     2022-10-12T16:20:47.369-05:00	DEBUG: Order final: {:id=>"1234", :total=>"4592", :subtotal=>"..." ... }
+
+## Stuctured data logging
 
 But, you could get more out of CloudWatch.  You could log your `@order` object
 as machine-readable data that you could
@@ -62,6 +66,8 @@ CloudWatch already provides a timestamp, so you don't need that.  The second,
 indented line of your log output is machine-readable JSON data, and after
 that is a human-readable, pretty-printed version for you to read.  CloudWatch will parse the JSON representation and index the things that it finds in it, and you can read the other part.
 
+## Query your logs
+
 Now, you can use AWS Log Insights to find log entries related to
 concepts in your application.  If you have an application with an "order" model that you care about, then you can query for log messages
 related to any given order `id`.  You can do queries based on attributes
@@ -88,6 +94,28 @@ logger with:
 
     require 'aws-app-logger'
     $logger = Aws::App::Logger.new
+
+### Log stuff just like before
+
+Now use that just like the standard Logger:
+
+    $logger.info 'Someting is happening!'
+
+### Log objects
+
+Log the `@session` object as JSON so that you can query for its values in the future:
+
+    $logger.debug 'The current session:', @session
+
+### Log additional context
+
+Log additional context with your `@session` object, to help you understand what was happening:
+
+    $logger.debug 'A condition was triggered!,
+      { action:'trigger', condition:'red' },
+      @session
+
+When you provide more than one object, you will get a JSON array in the log with all the objects in it.
 
 ### Log directly to CloudWatch
 
