@@ -72,10 +72,18 @@ module Aws
           end
 
         # ...and the second thing that you pass becomes a line of JSON data.
-        if (remainder = args).count.eql?(1)
-          remainder = remainder.first
-        end
-        message += Oj.dump(remainder)
+        data_to_log =
+          if (remainder = args).count.eql?(1)
+            remainder.first
+          else
+            # The JSON parsing in the Lambda-to-Cloudwatch logs will not
+            # recognize a list as valid JSON.  It looks for the first hash
+            # that it can find in the log entry.  So, we must pack the list
+            # into a hash.
+            {records: remainder}
+          end
+        message += Oj.dump(data_to_log)
+
         # Unless you suppress it, you'll also see your data pretty-printed.
         if self.pretty
           message += Rainbow.uncolor(
