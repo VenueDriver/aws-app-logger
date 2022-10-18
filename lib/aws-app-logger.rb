@@ -2,6 +2,7 @@
 
 require 'logger'
 require 'json'
+require 'oj'; Oj.default_options = {:mode => :compat }
 require 'awesome_print'
 require_relative "logger/version"
 require_relative "logger/formatter"
@@ -74,7 +75,7 @@ module Aws
         if (remainder = args).count.eql?(1)
           remainder = remainder.first
         end
-        message += JSON.dump(remainder)
+        message += Oj.dump(remainder)
         # Unless you suppress it, you'll also see your data pretty-printed.
         if self.pretty
           message += Rainbow.uncolor(

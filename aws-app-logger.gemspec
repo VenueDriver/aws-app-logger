@@ -42,6 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mocha', '~> 1.15'
   spec.add_dependency 'vcr', '~> 6.1'
   spec.add_dependency 'webmock', '~> 3.18', '>= 3.18.1'
+  spec.add_dependency 'oj', '~> 3.13', '>= 3.13.21'
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
