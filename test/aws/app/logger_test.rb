@@ -69,8 +69,8 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
       {id:'10102001', total:'1295', subtotal:'...'}
     assert(
       output.string.include?(@@test_message) &&
-      JSON.parse(output.string.split("\n")[1])[0]['action'].eql?('sale') &&
-      JSON.parse(output.string.split("\n")[1])[1]['id'].eql?('10102001')
+      JSON.parse(output.string.split("\n")[1])['records'][0]['action'].eql?('sale') &&
+      JSON.parse(output.string.split("\n")[1])['records'][1]['id'].eql?('10102001')
     )
   end
 
@@ -80,10 +80,11 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
       {action:'sale'},
       {id:'10102001', total:'1295', subtotal:'...'}
     )
+    puts "OUTPUT: #{output.string}"
     assert(
-      (data = JSON.parse(output.string.split(/^[\S]+\s/)[1])).first['action'].
+      (data = JSON.parse(output.string.split(/^[\S]+\s/)[1]))['records'].first['action'].
         eql?('sale') &&
-      data.last['id'].eql?('10102001')
+      data['records'].last['id'].eql?('10102001')
     )
   end
 
