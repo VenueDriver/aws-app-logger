@@ -80,9 +80,8 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
       {action:'sale'},
       {id:'10102001', total:'1295', subtotal:'...'}
     )
-    puts "OUTPUT: #{output.string}"
     assert(
-      (data = JSON.parse(output.string.split(/^[\S]+\s/)[1]))['records'].first['action'].
+      (data = JSON.parse(output.string.split(/\s+/)[2]))['records'].first['action'].
         eql?('sale') &&
       data['records'].last['id'].eql?('10102001')
     )
@@ -108,11 +107,11 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
   end
 
   # AWS CloudWatch provides the timestamp and that's better anyway.
-  test 'the default formatter does not include the timestamp' do
+  test 'the default formatter includes the timestamp' do
     $logger = Aws::App::Logger.new(output = StringIO.new)
     $logger.debug @@test_message
     assert(
-      !( output.string =~ /\d\d\d\d\-\d\d\-\d\d/ )
+      ( output.string =~ /^\d\d\d\d\-\d\d\-\d\d/ )
     )
   end
 

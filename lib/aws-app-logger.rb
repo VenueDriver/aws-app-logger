@@ -62,9 +62,7 @@ module Aws
         message =
           # Pull out the first argument if it's String, and start the message.
           if args.first.class.eql?(String)
-            args.shift +
-            # Indent the JSON line when there is a string message.
-            "\n  "
+            args.shift + "\n"
           else
             # If it's not a string then leave the arguments in place,
             # and the first argument will be emitted as JSON.
@@ -87,7 +85,7 @@ module Aws
         # Unless you suppress it, you'll also see your data pretty-printed.
         if self.pretty
           message += Rainbow.uncolor(
-            "\n#{remainder.class}\n#{remainder.ai}").gsub(/^/,'  ')
+            "\n#{remainder.class}\n#{remainder.ai}")
         end
         super(severity, nil, message, &block)
       end
