@@ -6,16 +6,14 @@ visualization, and more.
 
 ## Familiar logger interface
 
-You might have a lot of Ruby code that's already full of log statements that
-use the standard Logger class, like this:
+If you're using Ruby with AWS and you followed the [recommended logging setup](https://docs.aws.amazon.com/lambda/latest/dg/ruby-logging.html) using the standard [Logger](https://github.com/ruby/logger) Ruby tem, then you might have a lot of code that's already full of log statements like this:
 
     $logger.info  "Starting to process order: #{@order.id}"
     $logger.debug "Order: #{@order.inspect}"
     ...
     $logger.info  "Order final: #{@order.id}"
 
-If you're using AWS Lambda to run your code, then you'll be able to see your
-logs and search then in AWS CloudWatch:
+Your old code will still work if you add this gem.  You'll still be able to see your logs and search then in AWS CloudWatch:
 
     2022-10-12T16:20:45.891-05:00 DEBUG: Starting to process order: 1234
     2022-10-12T16:20:45.891-05:00 DEBUG: Order: {:id=>"1234", :total=>"4592", :subtotal=>"..." ... }
@@ -163,6 +161,14 @@ CloudWatch is good at parsing the JSON and displaying it for you, so you might
 never need this.
 
 ## Opinions
+
+### You don't need to log the `progname` with AWS
+
+The traditional Logger gem records the `progname` if you pass it as your second argument after your message.  With AWS and Cloudwatch, your context is already identified by the name of the log group.  The default format string removes this from the log entries.
+
+### You don't need the one-character status code at the beginning of every line
+
+Cloudwatch Log Insights can easily parse the contents of the log entries, and you don't need this kind of shortcut index for finding things.
 
 ### You still need to include a timestamp in your log messages.
 
