@@ -87,7 +87,6 @@ module Aws
           message += Rainbow.uncolor(
             "\n#{remainder.class}\n#{remainder.ai}")
         end
-        byebug
         super(severity, @progname || nil, message, &block)
       end
 
