@@ -87,7 +87,12 @@ module Aws
           message += Rainbow.uncolor(
             "\n#{remainder.class}\n#{remainder.ai}")
         end
-        super(severity, @progname || nil, message, &block)
+        super(severity,
+          # The AWS Lambda request ID, when available, is available in an
+          # undocumented global variable that's provided by the AWS Ruby
+          # runtime: https://github.com/aws/aws-lambda-ruby-runtime-interface-client/blob/main/lib/aws_lambda_ric/lambda_log_formatter.rb#L12
+          @progname || $_global_aws_request_id || nil,
+          message, &block)
       end
 
       %w{debug info warn error fatal unknown}.each do |level|
