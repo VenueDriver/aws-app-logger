@@ -178,6 +178,11 @@ There is no way to remove a single log entry from Cloudwatch.  If you need to be
 
 And for this same reason, you should refer to your own timestamps recorded in your log entries, not the Cloutwatch timestamps, when you're reconstructing sequences of events.  You might not need to perform this kind of log redaction now, but you might in the future.  If you do, then you won't want to update a lot of existing code.
 
+## Related
+
+* https://github.com/tilfin/ougai
+* https://github.com/amancevice/yake
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test-unit` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
