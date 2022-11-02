@@ -4,7 +4,7 @@ module Aws
   module App
     class Logger < ::Logger
       class Formatter < ::Logger::Formatter
-        Format = "[%s #%d%s] %s: %s"
+        Format = "[%s #%d%s] %s: %s\n"
         DatetimeFormat = "%Y-%m-%dT%H:%M:%S.%6N"
         def call(severity, time, progname, msg)
           # The AWS Lambda request ID, when available, is available in an
