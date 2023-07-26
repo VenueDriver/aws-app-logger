@@ -3,7 +3,6 @@
 require 'logger'
 require 'json'
 require 'oj'; Oj.default_options = {:mode => :compat }
-require 'awesome_print'
 require_relative "logger/version"
 require_relative "logger/formatter"
 
@@ -85,7 +84,7 @@ module Aws
         # Unless you suppress it, you'll also see your data pretty-printed.
         if self.pretty
           message += Rainbow.uncolor(
-            "\n#{remainder.class}\n#{remainder.ai}")
+            "\n#{remainder.class}\n#{JSON.pretty_generate(remainder)}")
         end
         super(severity, nil, message, &block)
       end
@@ -118,7 +117,7 @@ module Aws
           if @sequence_token
             log_event[:sequence_token] = @sequence_token
           end
-          STDOUT.puts "\OUTPUT:#{message}"
+          $stdout.puts "\OUTPUT:#{message}"
           @cloudwatch.put_log_events(log_event).tap do |response|
             @sequence_token = response.next_sequence_token
           end.rejected_log_events_info.nil?

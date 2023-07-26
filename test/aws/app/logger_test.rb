@@ -102,7 +102,7 @@ class Aws::App::LoggerTest < Test::Unit::TestCase
     $logger.debug @@test_message, {id:'10102001', total:'1295', subtotal:'...'}
     assert(
       output.string.include?(@@test_message) &&
-      output.string.include?(':id => "10102001"')
+      output.string.include?('"id": "10102001"')
     )
   end
 

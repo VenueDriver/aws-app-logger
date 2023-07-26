@@ -136,8 +136,8 @@ as the name of a log group in CloudWatch:
 ### Pretty printing
 
 You can also log an optional pretty-printed representation that displays the
-class name, and it uses Awesome Print to render the object so that you can see
-array indexes and useful things like that.
+class name, and it uses JSON.pretty_generate to render the object so that you
+can easily read it and also copy and paste it as JSON data.
 
 You can enable pretty printing with the `nopretty:true` option when you set up
 your logging:
